@@ -15,6 +15,10 @@ export default function Home(){
     <Hero/>
     <section className="promise-strip"><div><BadgeCheck/><span><strong>Verified gear</strong>Every listing inspected</span></div><div><Truck/><span><strong>Fast dispatch</strong>Tracked delivery</span></div><div><ShieldCheck/><span><strong>2-year cover</strong>Play with confidence</span></div><div><Headphones/><span><strong>Human support</strong>Players helping players</span></div></section>
 
+    <section className="console-handoff" id="featured">
+      <div className="console-handoff-inner"><div><h2>One console.<br /><em>Every world.</em></h2><p>The controller finds its home. Explore the PlayStation 5 collection, tuned for instant load times and all-day sessions.</p><Link className="button primary" to="/shop?category=consoles">Shop PS5 systems <ArrowRight size={16} /></Link></div><div className="handoff-orbit"><img src="/images/reference-console-remove-bg.png" alt="PlayStation 5 console" /></div></div>
+    </section>
+
     <section className="section-shell categories-section">
       <div className="section-heading"><div><span className="micro">CURATED DEPARTMENTS</span><h2>Build your world.</h2></div><Link to="/shop">Browse everything <ArrowUpRight size={16}/></Link></div>
       <div className="category-grid">{categories.slice(0,6).map((c,i)=><motion.div key={c.id} whileHover={{y:-6}} transition={{duration:.25}} className={`category-tile category-${i}`}><Link to={`/shop?category=${c.slug}`}><span className="tile-index">0{i+1}</span><img src={c.image} alt={c.name}/><div><h3>{c.name}</h3><p>{i===0?'Precision, redefined.':i===1?'Power without compromise.':i===2?'Hear every detail.':'Made for your setup.'}</p><ArrowUpRight/></div></Link></motion.div>)}</div>
@@ -28,6 +32,6 @@ export default function Home(){
 
     {spotlight&&<section className="spotlight"><div className="spotlight-copy"><span className="micro light">EDITOR'S CHOICE</span><h2>{spotlight.name}</h2><p>{spotlight.description || spotlight.tagline}</p><div className="spotlight-meta"><span>From</span><strong>${spotlight.price}</strong></div><Link className="button light-button" to={`/product/${spotlight.slug}`}>Explore the system <ArrowRight size={17}/></Link></div><div className="spotlight-art"><div className="spotlight-ring"/><img src={spotlight.image} alt={spotlight.name}/><span>ENGINEERED<br/>TO DISAPPEAR.</span></div></section>}
 
-    <section className="editorial section-shell"><div className="editorial-card editorial-main"><span className="micro">NEXUS SELECT</span><h2>Less choice.<br/>Better choices.</h2><p>We cut through endless listings to surface gear with exceptional design, performance and longevity.</p><Link to="/support/about">How we curate <ArrowUpRight size={15}/></Link></div><div className="editorial-card editorial-image"><img src="/images/monitors-detail.webp" alt="Premium gaming display"/><div><span className="micro light">SETUP STORIES</span><h3>A calmer desk.<br/>A sharper game.</h3><Link to="/shop?category=monitors">Explore displays <ArrowRight size={15}/></Link></div></div></section>
+    <section className="editorial section-shell"><div className="editorial-card editorial-main"><span className="micro">NEXUS SELECT</span><h2>Less choice.<br/>Better choices.</h2><p>We cut through endless listings to surface gear with exceptional design, performance and longevity.</p><Link to="/support/about">How we curate <ArrowUpRight size={15}/></Link></div><div className="editorial-card editorial-image"><img src="/images/nobg/monitors.png" alt="Premium gaming display"/><div><span className="micro light">SETUP STORIES</span><h3>A calmer desk.<br/>A sharper game.</h3><Link to="/shop?category=monitors">Explore displays <ArrowRight size={15}/></Link></div></div></section>
   </main>;
 }

@@ -51,7 +51,7 @@ export default function ChestIntro({
     camera.position.set(0, 2.5, innerWidth < 600 ? 12 : 9);
     camera.lookAt(0, 0.5, 0);
     const metal = new THREE.MeshStandardMaterial({
-      color: 0x9f33ef,
+      color: 0x1a7a4a,
       metalness: 0.8,
       roughness: 0.28,
     });
@@ -151,7 +151,7 @@ export default function ChestIntro({
     key.position.set(-3, 7, 5);
     key.castShadow = true;
     scene.add(key);
-    const rim = new THREE.PointLight(0x9f33ef, 28, 15);
+    const rim = new THREE.PointLight(0x1a7a4a, 28, 15);
     rim.position.set(4, 2, -2);
     scene.add(rim);
     const glow = new THREE.PointLight(0xabf909, 0, 9);
@@ -321,14 +321,14 @@ export default function ChestIntro({
       className={'chest-intro' + (paused ? ' motion-paused' : '')}
       role="dialog"
       aria-modal="true"
-      aria-label="Welcome to GameCraft Hub. Scroll down to open the chest, or skip intro."
+      aria-label="Welcome to Gamers End. Scroll down to open the chest, or skip intro."
     >
       <div className="intro-canvas" ref={mount} />
       <div className="chest-radiance" aria-hidden="true" />
       <div className="intro-top">
         <div className="wordmark supplied-brand">
-          <img src="/images/gamecraft-logo.webp" alt="GameCraft Hub" width={54} height={54} />
-          <span className="brand-name">GameCraft<span>Hub</span></span>
+          <img src="/images/gamers-end-logo.png" alt="Gamers End" width={54} height={54} />
+          <span className="brand-name">Gamers<span>End</span></span>
         </div>
         <div className="intro-controls"><button className="skip-intro" aria-label={paused ? 'Resume chest animation' : 'Pause chest animation'} aria-pressed={paused} onClick={() => { pausedRef.current = !pausedRef.current; setPaused(pausedRef.current); }}>{paused ? <Play size={14} /> : <Pause size={14} />} {paused ? 'Resume' : 'Pause'}</button><button className="skip-intro" onClick={onFinish}>Skip intro <X size={15} /></button></div>
       </div>

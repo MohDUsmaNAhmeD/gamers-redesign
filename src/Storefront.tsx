@@ -9,9 +9,10 @@ import Catalog from './pages/Catalog';
 import Product from './pages/Product';
 import Support from './pages/Support';
 import './store.css';
+import './polish.css';
 
 function Mark() {
-  return <Link className="mark" to="/" aria-label="Nexus home"><span className="mark-glyph">N</span><span>NEXUS</span></Link>;
+  return <Link className="mark" to="/" aria-label="Gamers End home"><img src="/images/gamers-end-logo.png" alt="Gamers End" /></Link>;
 }
 
 function Header() {
@@ -50,9 +51,9 @@ function Header() {
 function Footer() {
   const { categories } = useStore();
   return <footer className="footer"><div className="footer-shell">
-    <div className="footer-lead"><Mark/><h2>Designed for the<br/>next move.</h2><p>A concept marketplace for remarkable gaming hardware.</p></div>
+    <div className="footer-lead"><Mark/><h2>Designed for the<br/>next move.</h2><p>Gamers End is a concept marketplace for remarkable gaming hardware.</p></div>
     <div className="footer-columns"><div><span>Marketplace</span>{categories.slice(0,4).map(c=><Link key={c.id} to={`/shop?category=${c.slug}`}>{c.name}</Link>)}</div><div><span>Explore</span><Link to="/shop?sort=newest">New drops</Link><Link to="/shop?deals=true">Offers</Link><Link to="/support/gear-guide">Gear guide</Link></div><div><span>Support</span><Link to="/support/shipping">Delivery</Link><Link to="/support/warranty">Returns</Link><Link to="/support/contact">Help</Link></div></div>
-    <div className="footer-bottom"><span>Copyright {new Date().getFullYear()} Nexus Concept Store</span><span>Demo experience - No real payment or fulfillment</span></div>
+    <div className="footer-bottom"><span>Copyright {new Date().getFullYear()} Gamers End</span><span>Demo experience - No real payment or fulfillment</span></div>
   </div></footer>;
 }
 

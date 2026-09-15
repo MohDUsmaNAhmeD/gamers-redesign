@@ -142,7 +142,7 @@ const ConsoleModel = forwardRef<ConsoleAPI>(function ConsoleModel(_, ref) {
   }));
 
   useEffect(() => {
-    if (reduced || !mountRef.current) return;
+    if (!mountRef.current) return;
     const container = mountRef.current;
 
     let renderer: THREE.WebGLRenderer;
@@ -178,7 +178,7 @@ const ConsoleModel = forwardRef<ConsoleAPI>(function ConsoleModel(_, ref) {
     keyLight.shadow.mapSize.set(512, 512);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x9f33ef, 0.3);
+    const fillLight = new THREE.DirectionalLight(0x1a7a4a, 0.3);
     fillLight.position.set(-4, 2, -3);
     scene.add(fillLight);
 
@@ -196,9 +196,11 @@ const ConsoleModel = forwardRef<ConsoleAPI>(function ConsoleModel(_, ref) {
 
     let time = 0;
     const animate = () => {
-      time += 0.006;
-      consoleModel.rotation.y = -0.2 + Math.sin(time) * 0.06;
-      consoleModel.position.y = Math.sin(time * 0.8) * 0.02;
+      if (!reduced) {
+        time += 0.006;
+        consoleModel.rotation.y = -0.2 + Math.sin(time) * 0.06;
+        consoleModel.position.y = Math.sin(time * 0.8) * 0.02;
+      }
       renderer.render(scene, camera);
       const state = sceneRef.current;
       if (state) state.animId = requestAnimationFrame(animate);

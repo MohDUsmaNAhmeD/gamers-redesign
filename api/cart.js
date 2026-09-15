@@ -1,5 +1,8 @@
 import supabase from './db-client.js';
+import { localGetCart, localMutateCart } from './localCart.js';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+const hasSupabase = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,6 +13,18 @@ export default async function handler(req, res) {
   try {
     const id = req.method === 'GET' ? req.query.id : req.body?.id;
     if (!uuid.test(id || '')) return res.status(400).json({ error: 'Invalid cart session.' });
+
+    // Local demo store when the database is not configured or unreachable
+    if (!hasSupabase) {
+      if (req.method === 'GET') return res.status(200).json(await localGetCart(id));
+      if (req.method !== 'PUT') return res.status(405).json({ error: 'Method not allowed' });
+      const { action, product_id, quantity } = req.body;
+      if (!Number.isInteger(product_id)) return res.status(400).json({ error: 'Choose a valid product.' });
+      const result = await localMutateCart(id, action, product_id, quantity);
+      if (result.error) return res.status(400).json({ error: result.error });
+      return res.status(200).json(result.cart);
+    }
+
     const { data: stored, error: getError } = await supabase.from('nexus_carts').select('*').eq('id', id).maybeSingle();
     if (getError) throw getError;
     const cart = stored || { id, items: [], saved_items: [] };
@@ -33,5 +48,23 @@ export default async function handler(req, res) {
     const { data, error: writeError } = await supabase.from('nexus_carts').upsert({ id, items, saved_items: saved, updated_at: new Date().toISOString() }).select().single();
     if (writeError) throw writeError;
     return res.status(200).json(data);
-  } catch (err) { console.error('Cart error:', err); return res.status(500).json({ error: 'Your cart could not be updated. Please try again.' }); }
+  } catch (err) {
+    console.error('Cart error:', err?.message || err);
+    // Database unreachable mid-session: fall back to the local demo store
+    try {
+      const id = req.method === 'GET' ? req.query.id : req.body?.id;
+      if (!uuid.test(id || '')) return res.status(400).json({ error: 'Invalid cart session.' });
+      if (req.method === 'GET') return res.status(200).json(await localGetCart(id));
+      if (req.method === 'PUT') {
+        const { action, product_id, quantity } = req.body || {};
+        if (!Number.isInteger(product_id)) return res.status(400).json({ error: 'Choose a valid product.' });
+        const result = await localMutateCart(id, action, product_id, quantity);
+        if (result.error) return res.status(400).json({ error: result.error });
+        return res.status(200).json(result.cart);
+      }
+      return res.status(405).json({ error: 'Method not allowed' });
+    } catch {
+      return res.status(500).json({ error: 'Your cart could not be updated. Please try again.' });
+    }
+  }
 }

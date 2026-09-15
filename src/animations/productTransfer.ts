@@ -66,7 +66,7 @@ export function setupProductTransferScroll(
         if (!target) return;
 
         // Set up proxy
-        proxyImg.src = '/images/hero-controller.webp';
+        proxyImg.src = '/images/nobg/hero-controller.png';
         gsap.set(flightProxy, { display: 'block', opacity: 1, position: 'fixed', zIndex: 9999, pointerEvents: 'none' });
         gsap.set(proxyImg, {
           width: 100,

@@ -16,19 +16,15 @@ export default function ProductCard({ product }: { product: Product }) {
 
   const onEnter = useCallback(() => {
     if (reduced || !cardRef.current) return;
-    const card = cardRef.current;
     const img = imageRef.current?.querySelector('img');
-    gsap.to(card, { y: -6, duration: 0.35, ease: 'power2.out' });
-    if (img) gsap.to(img, { scale: 1.05, duration: 0.5, ease: 'power2.out' });
-  }, [reduced]);
+    if (img) gsap.to(img, { scale: 1.03, duration: 0.7, ease: 'power2.out' });
+  }, []);
 
   const onLeave = useCallback(() => {
     if (reduced || !cardRef.current) return;
-    const card = cardRef.current;
     const img = imageRef.current?.querySelector('img');
-    gsap.to(card, { y: 0, duration: 0.4, ease: 'power2.out' });
-    if (img) gsap.to(img, { scale: 1, duration: 0.5, ease: 'power2.out' });
-  }, [reduced]);
+    if (img) gsap.to(img, { scale: 1, duration: 0.7, ease: 'power2.out' });
+  }, []);
 
   useEffect(() => {
     if (reduced || !cardRef.current) return;
@@ -75,14 +71,10 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="condition">{product.condition}</span>
         </div>
         <Link to={'/product/' + product.slug} className="product-name">{product.name}</Link>
-        <p className="product-tagline">{product.tagline}</p>
         <div className="product-bottom">
           <div>
             <span className="product-price">{money(product.price)}</span>
             {product.original_price && <del>{money(product.original_price)}</del>}
-            <span className="stock">
-              <i />{product.stock > 0 ? 'In stock - Ready to ship' : 'Out of stock'}
-            </span>
           </div>
           <button
             ref={addBtnRef}
@@ -94,7 +86,6 @@ export default function ProductCard({ product }: { product: Product }) {
             {added ? <Check size={18} /> : <Plus size={18} />}
           </button>
         </div>
-        <div className="seller-line">Sold by {product.seller}</div>
       </div>
     </article>
   );

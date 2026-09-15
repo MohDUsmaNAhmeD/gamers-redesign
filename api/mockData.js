@@ -1,12 +1,12 @@
 export const MOCK_CATEGORIES = [
-  { id: 1, name: 'Consoles', slug: 'consoles', image: '/images/consoles.webp', position: 1 },
-  { id: 2, name: 'Controllers', slug: 'controllers', image: '/images/controllers.webp', position: 2 },
-  { id: 3, name: 'Headsets', slug: 'headsets', image: '/images/headsets.webp', position: 3 },
-  { id: 4, name: 'Keyboards', slug: 'keyboards', image: '/images/keyboards.webp', position: 4 },
-  { id: 5, name: 'Mice', slug: 'mice', image: '/images/mice.webp', position: 5 },
-  { id: 6, name: 'Monitors', slug: 'monitors', image: '/images/monitors.webp', position: 6 },
-  { id: 7, name: 'Games', slug: 'games', image: '/images/games.webp', position: 7 },
-  { id: 8, name: 'Accessories', slug: 'accessories', image: '/images/accessories.webp', position: 8 }
+  { id: 1, name: 'Consoles', slug: 'consoles', image: '/images/nobg/consoles.png', position: 1 },
+  { id: 2, name: 'Controllers', slug: 'controllers', image: '/images/nobg/controllers.png', position: 2 },
+  { id: 3, name: 'Headsets', slug: 'headsets', image: '/images/nobg/headsets.png', position: 3 },
+  { id: 4, name: 'Keyboards', slug: 'keyboards', image: '/images/nobg/keyboards.png', position: 4 },
+  { id: 5, name: 'Mice', slug: 'mice', image: '/images/nobg/mice-detail.png', position: 5 },
+  { id: 6, name: 'Monitors', slug: 'monitors', image: '/images/nobg/monitors.png', position: 6 },
+  { id: 7, name: 'Games', slug: 'games', image: '/images/nobg/games.png', position: 7 },
+  { id: 8, name: 'Accessories', slug: 'accessories', image: '/images/nobg/accessories.png', position: 8 }
 ];
 
 export const MOCK_PRODUCTS = [
@@ -18,8 +18,8 @@ export const MOCK_PRODUCTS = [
     category: 'consoles',
     price: 499.99,
     original_price: null,
-    image: '/images/consoles-detail.webp',
-    gallery: ['/images/consoles-detail.webp', '/images/consoles.webp'],
+    image: '/images/nobg/consoles.png',
+    gallery: ['/images/nobg/consoles.png', '/images/consoles.webp'],
     tagline: 'Ultra-high speed SSD with ray tracing and 4K gaming ready.',
     description: 'Experience lightning fast loading with an ultra-high speed SSD, deeper immersion with support for haptic feedback, adaptive triggers, and 3D Audio.',
     specs: {
@@ -42,8 +42,8 @@ export const MOCK_PRODUCTS = [
     category: 'controllers',
     price: 69.99,
     original_price: 74.99,
-    image: '/images/controllers-detail.webp',
-    gallery: ['/images/controllers-detail.webp', '/images/hero-controller.webp'],
+    image: '/images/nobg/controllers.png',
+    gallery: ['/images/nobg/controllers.png', '/images/hero-controller.webp'],
     tagline: 'Haptic feedback, dynamic adaptive triggers, and built-in mic.',
     description: 'Discover a deeper, highly immersive gaming experience that brings the action to life in the palms of your hands.',
     specs: {
@@ -66,8 +66,8 @@ export const MOCK_PRODUCTS = [
     category: 'headsets',
     price: 179.99,
     original_price: 199.99,
-    image: '/images/headsets-detail.webp',
-    gallery: ['/images/headsets-detail.webp', '/images/headsets.webp'],
+    image: '/images/nobg/headsets.png',
+    gallery: ['/images/nobg/headsets.png', '/images/headsets.webp'],
     tagline: 'Wireless esports headset with ultra-clear microphone.',
     description: 'If esports is your calling, answer it with the ultimate wireless headset for competitive play, designed with top esports pros.',
     specs: {
@@ -90,8 +90,8 @@ export const MOCK_PRODUCTS = [
     category: 'accessories',
     price: 29.99,
     original_price: 39.99,
-    image: '/images/accessories-detail.webp',
-    gallery: ['/images/accessories-detail.webp', '/images/accessories.webp'],
+    image: '/images/nobg/accessories.png',
+    gallery: ['/images/nobg/accessories.png', '/images/accessories.webp'],
     tagline: 'Dual controller fast dock with intelligent charge management.',
     description: 'Click-in design charges up to two wireless controllers simultaneously without having to connect them to your console.',
     specs: {
@@ -114,8 +114,8 @@ export const MOCK_PRODUCTS = [
     category: 'keyboards',
     price: 189.99,
     original_price: null,
-    image: '/images/keyboards-detail.webp',
-    gallery: ['/images/keyboards-detail.webp', '/images/keyboards.webp'],
+    image: '/images/nobg/keyboards.png',
+    gallery: ['/images/nobg/keyboards.png', '/images/keyboards.webp'],
     tagline: 'OmniPoint 2.0 adjustable hypermagnetic switches.',
     description: 'World fastest keyboard with customizable actuation points from 0.1mm to 4.0mm and rapid trigger capability.',
     specs: {
@@ -138,8 +138,8 @@ export const MOCK_PRODUCTS = [
     category: 'mice',
     price: 149.99,
     original_price: null,
-    image: '/images/mice-detail.webp',
-    gallery: ['/images/mice-detail.webp', '/images/mice.webp'],
+    image: '/images/nobg/mice-detail.png',
+    gallery: ['/images/nobg/mice-detail.png', '/images/mice.webp'],
     tagline: '63g ultra-lightweight ergonomic esports mouse.',
     description: 'Refined in collaboration with top esports pros, iconic ergonomic form is now 25% lighter with next-gen sensor tech.',
     specs: {
@@ -162,8 +162,8 @@ export const MOCK_PRODUCTS = [
     category: 'monitors',
     price: 899.99,
     original_price: 999.99,
-    image: '/images/monitors-detail.webp',
-    gallery: ['/images/monitors-detail.webp', '/images/monitors.webp'],
+    image: '/images/nobg/monitors.png',
+    gallery: ['/images/nobg/monitors.png', '/images/monitors.webp'],
     tagline: 'Ultrawide 240Hz 0.03ms QD-OLED curved display.',
     description: 'Immerse in breathtaking clarity with 800R curved QD-OLED panel, true 10-bit color, and custom heatsink cooling.',
     specs: {
@@ -186,8 +186,8 @@ export const MOCK_PRODUCTS = [
     category: 'games',
     price: 79.99,
     original_price: null,
-    image: '/images/games-detail.webp',
-    gallery: ['/images/games-detail.webp', '/images/games.webp'],
+    image: '/images/nobg/games.png',
+    gallery: ['/images/nobg/games.png', '/images/games.webp'],
     tagline: 'Includes base game and massive expansion chapter.',
     description: 'Guided by Empyrean Miquella, players are summoned to the Land of Shadow, a place obscured by the Erdtree where the goddess Marika first set foot.',
     specs: {

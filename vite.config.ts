@@ -22,11 +22,12 @@ function apiPlugin(): Plugin {
         const name = url.pathname.split("/api/")[1]?.split("/")[0];
         if (!name) return next();
 
+        let body: any = undefined;
         try {
           const modPath = join(__dirname, "api", `${name}.js`);
           const mod = await import(pathToFileURL(modPath).href + "?t=" + Date.now());
 
-          const body = await new Promise<any>((resolve) => {
+          body = await new Promise<any>((resolve) => {
             if (req.method === "GET" || req.method === "OPTIONS") return resolve(undefined);
             let data = "";
             req.on("data", (chunk) => (data += chunk));
@@ -63,8 +64,34 @@ function apiPlugin(): Plugin {
             return;
           }
           if (name === "cart") {
+            // Attempt the local in-memory cart fallback before giving up
+            try {
+              // @ts-ignore fallback local module
+              const { localGetCart, localMutateCart } = await import("./api/localCart.js");
+              const cartId = url.searchParams.get("id") || (body as any)?.id || "";
+              if (req.method === "GET") {
+                const cart = await localGetCart(cartId);
+                res.writeHead(200, { "Content-Type": "application/json" });
+                res.end(JSON.stringify(cart));
+                return;
+              }
+              if (req.method === "PUT" && body) {
+                const { action, product_id, quantity } = body as any;
+                const result = await localMutateCart(cartId, action, product_id, quantity);
+                if (result.error) {
+                  res.writeHead(400, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify({ error: result.error }));
+                } else {
+                  res.writeHead(200, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify(result.cart));
+                }
+                return;
+              }
+            } catch {
+              // fall through to generic error below
+            }
             res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ id: url.searchParams.get("id") || "local-demo-cart", items: [], saved_items: [] }));
+            res.end(JSON.stringify({ id: url.searchParams.get("id") || (body as any)?.id || "", items: [], saved_items: [] }));
             return;
           }
           res.writeHead(500, { "Content-Type": "application/json" });

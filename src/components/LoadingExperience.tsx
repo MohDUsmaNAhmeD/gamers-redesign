@@ -123,7 +123,7 @@ export default function LoadingExperience({ ready, onComplete, onSkip }: {
 
   useEffect(() => {
     let cancelled = false;
-    const assets = ['/images/gamecraft-logo.webp', '/images/reference-console.webp'].map(src => {
+    const assets = ['/images/gamers-end-logo.png', '/images/reference-console.webp'].map(src => {
       const image = new Image(); image.src = src;
       return image.decode();
     });
@@ -166,7 +166,7 @@ export default function LoadingExperience({ ready, onComplete, onSkip }: {
     autoEnter.current?.paused(pausedRef.current);
   };
 
-  return <div className="loading-splash welcome-experience" ref={root} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Welcome to GameCraft Hub">
+  return <div className="loading-splash welcome-experience" ref={root} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Welcome to Gamers End">
     <div className="welcome-glow" aria-hidden="true" />
     <div className="welcome-motes" aria-hidden="true">
       {motes.map(mote => (
@@ -181,7 +181,7 @@ export default function LoadingExperience({ ready, onComplete, onSkip }: {
         <div className="welcome-console-frame">
           <img ref={consoleImg} className="welcome-console" src="/images/reference-console.webp" alt="" aria-hidden="true" width={1216} height={556} fetchPriority="high" />
           <div className="welcome-screen">
-            <img ref={bootLogo} className="welcome-boot-logo" src="/images/gamecraft-logo.webp" alt="GameCraft Hub" width={120} height={120} />
+            <img ref={bootLogo} className="welcome-boot-logo" src="/images/gamers-end-logo.png" alt="Gamers End" width={120} height={120} />
             <div ref={screenFlicker} className="welcome-screen-flicker" aria-hidden="true" />
           </div>
         </div>
