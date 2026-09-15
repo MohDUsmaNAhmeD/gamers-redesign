@@ -199,167 +199,11 @@ body { background: var(--alabaster); color: var(--ink); }
 .icon-button:hover, .text-button:hover { color: var(--purple); }
 
 /* ═══════════════════════════════════════════════════════════════
-   HERO — Specialized Controllers layout
-   Left text | Right controller bleeding off-edge
+   HERO — styles live in Hero.tsx <style> block (scoped inline)
+   Only global Three.js canvas utilities kept here
    ═══════════════════════════════════════════════════════════════ */
-.hero-cinematic {
-  position: relative;
-  /* ~70vh height — controller bleeds below */
-  min-height: clamp(480px, 72vh, 780px);
-  height: clamp(480px, 72vh, 780px);
-  background: #0a0b0c;
-  overflow: hidden;
-  isolation: isolate;
-}
 
-/* Background ambient glow — concentrated behind controller on the right */
-.hero-bg-gradient {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 65% 100% at 82% 40%, color-mix(in srgb, #1a7a4a 50%, transparent), transparent 70%),
-    radial-gradient(ellipse 45% 70% at 78% 44%, color-mix(in srgb, #9dff25 20%, transparent), transparent 60%),
-    radial-gradient(ellipse 40% 60% at 22% 55%, color-mix(in srgb, #1a7a4a 20%, transparent), transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Grid overlay */
-.hero-cinematic .hero-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 1;
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--lime) 12%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--lime) 12%, transparent) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 90%);
-  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 90%);
-}
-
-/* Inner flex container */
-.hero-cinematic-inner {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-/* ────────────────────────
-   LEFT — Text content
-   ──────────────────────── */
-.hero-text-block {
-  position: relative;
-  z-index: 3;
-  flex: 0 0 auto;
-  width: clamp(320px, 42%, 580px);
-  padding-left: clamp(40px, 7vw, 110px);
-  padding-right: clamp(24px, 3vw, 48px);
-}
-
-/* Overline label */
-.hero-label {
-  font: 500 11px/1 var(--tech);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--lime) 70%, transparent);
-  margin: 0 0 20px;
-}
-
-/* Big heading */
-.hero-headline {
-  margin: 0;
-  padding: 0;
-}
-.hero-line {
-  display: block;
-  font: 700 clamp(2.6rem, 4.6vw, 5.2rem)/1.0 Inter, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-  color: #f0f0ee;
-  letter-spacing: -0.04em;
-}
-.hero-line-accent {
-  color: var(--lime);
-}
-
-/* Subtitle */
-.hero-subline {
-  margin: 16px 0 0;
-  font: 400 clamp(13px, 1.1vw, 15px)/1.65 var(--tech);
-  color: #7a7e82;
-  letter-spacing: -0.005em;
-  max-width: 400px;
-}
-
-/* CTA */
-.hero-cta {
-  margin-top: 32px;
-}
-.hero-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--lime);
-  color: #0c0e0f;
-  font: 600 13px/1 var(--tech);
-  letter-spacing: -0.01em;
-  padding: 13px 24px;
-  border-radius: var(--radius-full);
-  border: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--lime) 40%, transparent);
-}
-.hero-cta-btn:hover {
-  background: #c8ff30;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 28px color-mix(in srgb, var(--lime) 38%, transparent);
-}
-.hero-cta-btn svg { flex-shrink: 0; }
-
-/* ────────────────────────
-   RIGHT — Controller image
-   Bleeds off right and bottom edges
-   ──────────────────────── */
-.hero-3d-controller {
-  position: absolute;
-  /* Push right so roughly half the controller is off-screen */
-  right: -6%;
-  /* Start slightly above section top so it overflows bottom */
-  top: -5%;
-  /* Large enough to dominate the right side */
-  width: clamp(500px, 62vw, 1000px);
-  height: auto;
-  z-index: 2;
-  pointer-events: none;
-}
-.hero-ctrl-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  /* screen blend mode: black bg becomes transparent, controller floats */
-  mix-blend-mode: screen;
-  /* Slight right-push so right edge is cropped by overflow:hidden on hero */
-  transform: translateX(8%);
-  user-select: none;
-  -webkit-user-drag: none;
-}
-.hero-3d-mobile-ctrl { display: none; }
-/* Keep legacy alias so nothing breaks */
-.controller-canvas { display: none; }
-.controller-glow-3d { display: none; }
-
-/* Legacy aliases kept for unused refs */
-.hero-eyebrow-row { margin-bottom: 20px; }
-.hero-kicker { display: none; }
-.hero-kicker-dot { display: none; }
-.hero-tech-meta { display: none; }
-.hero-scroll-hint { display: none; }
-.scroll-line { display: none; }
-.replay-button { display: none; }
-
-/* Three.js Canvas Containers (global) */
+/* Three.js Canvas Containers (used in other sections) */
 .three-canvas-container {
   width: 100%;
   height: 100%;
@@ -370,6 +214,19 @@ body { background: var(--alabaster); color: var(--ink); }
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Legacy hero aliases — kept so old refs don't 404 */
+.hero-bg-gradient     { display: none; }
+.hero-cinematic-inner { display: contents; }
+.hero-3d-mobile-ctrl  { display: none; }
+.controller-canvas    { display: none; }
+.controller-glow-3d   { display: none; }
+.hero-kicker          { display: none; }
+.hero-scroll-hint     { display: none; }
+.scroll-line          { display: none; }
+.replay-button        { display: none; }
+
+
 
 /* ═══════════════════════════════════════════════════════════════
    TECH RAIL — Narrow horizontal information strip
